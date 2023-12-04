@@ -8,3 +8,4 @@ def get_html(url: str) ->  str | None:
     response = requests.get(url)
     if response.ok:
         return response.text
+
