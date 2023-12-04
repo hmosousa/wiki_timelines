@@ -5,22 +5,21 @@ class TestWikiData:
     api = WikiData()
 
     def test_entity(self):
-        content = self.api.entity(15920546)
-        assert "Q15920546" in content["entities"]
+        entity = self.api.entity(15920546)
+        assert entity['id'] == "Q15920546"
 
     def test_invalid_entity(self):
-        content = self.api.entity(159205460)
-        assert "missing" in content["entities"]["Q159205460"]
+        entity = self.api.entity(159205460)
+        assert entity is None
 
 
 class TestWikiPedia:
     api = WikiPedia()
 
     def test_page(self):
-        content = self.api.page(17545100)
-        html = content["parse"]["text"]["*"]
+        html = self.api.page(17545100)
         assert isinstance(html, str)
 
     def test_invalid_page(self):
-        content = self.api.page(175451000)
-        assert "error" in content
+        html = self.api.page(175451000)
+        assert html is None

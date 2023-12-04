@@ -16,7 +16,7 @@ class API(ABC):
             return result.json()
         else:
             logger.warning(
-                f"Failed to fetch entity {id} with status code {result.status_code}."
+                f"Failed to fetch {params} with status code {result.status_code}."
             )
 
 
@@ -24,15 +24,26 @@ class WikiData(API):
     def __init__(self) -> None:
         self.endpoint = "https://www.wikidata.org/w/api.php"
 
-    def entity(self, id: int) -> dict:
+    def entity(self, id_: int) -> dict:
         params = {
             "action": "wbgetentities",
-            "ids": f"Q{id}",
+            "ids": f"Q{id_}",
             "format": "json",
             "languages": "en",
-            "props": "info|aliases|claims",
+            "props": "info|aliases|claims|sitelinks/urls",
+            "sitefilter": "enwiki",
         }
-        return self._fetch(params)
+
+        content = self._fetch(params)
+
+        entity = None
+        is_none = content is None
+        is_error = "error" in content
+        if not is_none and not is_error:
+            content = content["entities"][f"Q{id_}"]
+            if "missing" not in content:
+                entity = content
+        return entity
 
 
 class WikiPedia(API):
@@ -47,4 +58,10 @@ class WikiPedia(API):
             "prop": "text",
             "redirects": "",
         }
-        return self._fetch(params)
+
+        content = self._fetch(params)
+
+        page = None
+        if "error" not in content:
+            page = content["parse"]["text"]["*"]
+        return page
