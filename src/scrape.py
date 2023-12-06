@@ -1,8 +1,12 @@
+import logging
+
 from bs4 import BeautifulSoup
 
 from src.api import WikiData, WikiPedia
 from src.meta import END_TIME_PID, START_TIME_PID
 from src.utils import get_html
+
+logger = logging.getLogger(__name__)
 
 
 def _extract_paragraphs(html: str):
@@ -18,10 +22,11 @@ def _extract_paragraphs(html: str):
 def _get_property(entity, property):
     if property in entity["claims"]:
         content = entity["claims"][property][0]
-        try: 
+        try:
             value = content["mainsnak"]["datavalue"]["value"]
-        except:
-            value = content
+        except Exception as e:
+            logger.info(e)
+            # value = content
         return value
 
 

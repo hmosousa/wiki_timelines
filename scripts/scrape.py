@@ -7,6 +7,7 @@ import fire
 from src.meta import MAX_WIKIDATA_ID
 from src.scrape import scrape_entity
 
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
@@ -37,11 +38,11 @@ def main(start_id: int = None, end_id: int = None):
         if opath.exists():
             continue
 
-        print(f"Extracting entity {entity_id}.")
+        logger.info(f"Extracting entity {entity_id}.")
         result = scrape_entity(entity_id)
 
         if result:
-            print("Successfully parsed.")
+            logger.info("Successfully parsed.")
             json.dump(result, opath.open("w"), indent=4)
 
 

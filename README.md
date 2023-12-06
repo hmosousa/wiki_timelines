@@ -8,4 +8,8 @@ The idea is to get sentences from Wikipedia that contain events withenteries on 
 
 This sentence contains three wikidata entires - [Revolution of Dignity](https://www.wikidata.org/wiki/Q15733401), [Annexation of Crimea](https://www.wikidata.org/wiki/Q15920546), and [Donbas war](https://www.wikidata.org/wiki/Q16335075) - which can be found on the Wikidata conteining the temporal information. More specifically, we can find on wikidata the start and end date of the events. From there, we can infer the timeline of events.
 
+
+In WikiData the start and end time have the property ids `P580` and `P582`, respectively. By running a count query - `SELECT (COUNT(DISTINCT ?item) AS ?count) WHERE {?item wdt:P580 [].}` - on [https://query.wikidata.org/](https://query.wikidata.org/) we get a count of 753,524 for the number of entities with start date and 655,013 for the end date. So, in principle, one is able to produce a large number of timelines from wikipedia documents.
+
+
 ![Powered by Wikidata](https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Wikidata_Stamp_Rec_Dark.svg/240px-Wikidata_Stamp_Rec_Dark.svg.png)
