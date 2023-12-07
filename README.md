@@ -19,7 +19,7 @@ This sentence mentions three WikiData entries: [Revolution of Dignity](https://w
 As illustrated in the timeline above, in this dataset we represent each event into `start` and `end` points and annotate the timelines with the point relations between them. Between time points can only be three type of relations, namely: before (`<`), after (`>`), or equal (`=`).
  
  
-By querying the count of entities with start dates (`P580`) yields 753,524, and end dates (`P582`) yields 655,013 using the query: 
+By [querying](https://query.wikidata.org/) the count of entities with start dates (`P580`) yields 753,524, and end dates (`P582`) yields 655,013 using the query: 
 
 ```sparql
 SELECT (COUNT(DISTINCT ?item) AS ?count) WHERE {?item wdt:P580 [].}
