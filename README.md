@@ -1,8 +1,10 @@
-# Wiki Timelines
+# Wiki Timelines 
+
+[<img src="https://huggingface.co/datasets/huggingface/brand-assets/resolve/main/hf-logo.png" alt="drawing" width="30"/>](https://huggingface.co/datasets/hugosousa/WikiTimelines)
 
 ## Overview
 
-Wiki Timelines is a dataset that contains paragraphs of text along with annotation of the timeline of (some) events. This was accomplished by extracting sentences from Wikipedia that reference events with corresponding entries on WikiData that are anchored in time, *i.e.*, have start or end time. 
+Wiki Timelines is a dataset that contains paragraphs of text along with annotation of the timeline of (some) events. This was accomplished by extracting sentences from Wikipedia that reference events with corresponding entries on WikiData that are anchored in time, *i.e.*, have start or end time. The resulting dataset is available in HuggingFace  
 
 ### Example
 
