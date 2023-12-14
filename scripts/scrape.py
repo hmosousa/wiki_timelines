@@ -8,6 +8,7 @@ from src.meta import MAX_WIKIDATA_ID
 from src.scrape import scrape_entity
 
 logging.basicConfig(level=logging.INFO)
+
 logger = logging.getLogger(__name__)
 
 
@@ -39,11 +40,14 @@ def main(start_id: int = None, end_id: int = None):
             continue
 
         logger.info(f"Extracting entity {entity_id}.")
-        result = scrape_entity(entity_id)
+        try:
+            result = scrape_entity(entity_id)
 
-        if result:
-            logger.info("Successfully parsed.")
-            json.dump(result, opath.open("w"), indent=4)
+            if result:
+                logger.info("Successfully parsed.")
+                json.dump(result, opath.open("w"), indent=4)
+        except Exception as e:
+            logger.warning(f"Extraction of entity {entity_id} failed with error {e}")
 
 
 if __name__ == "__main__":
