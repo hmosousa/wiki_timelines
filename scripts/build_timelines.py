@@ -63,10 +63,16 @@ def build_timelines(paragraphs, temporal_entities):
 def main():
     entities_path = ROOT / "data" / "entities"
 
+    logger.info('Collecting entities.')
     temporal_entities = get_temporal_entities(entities_path)
+    
+    logger.info('Collecting paragraphs.')
     paragraphs = collect_paragraphs(entities_path)
+
+    logger.info('Building timelines.')
     timelines = build_timelines(paragraphs, temporal_entities)
 
+    logger.info('Sorting the collected timelines.')
     opath = ROOT / "data" / "timelines.json"
     json.dump(timelines, opath.open("w"), indent=True)
 
